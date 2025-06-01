@@ -1,0 +1,12 @@
+option(
+    'authdes',
+    type: 'boolean',
+    value: false,
+    description: 'Enable DES support',
+)
+
+option(
+    'gssapi',
+    type: 'feature',
+    description: 'Use GSSAPI',
+)
