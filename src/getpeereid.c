@@ -32,6 +32,10 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 
+#ifndef SO_PEERCRED
+#include <sys/ucred.h>
+#endif
+
 #include <errno.h>
 #include <unistd.h>
 
@@ -40,6 +44,7 @@
 int
 getpeereid(int s, uid_t *euid, gid_t *egid)
 {
+#ifdef SO_PEERCRED
 	struct ucred uc;
 	socklen_t uclen;
 	int error;
@@ -53,6 +58,21 @@ getpeereid(int s, uid_t *euid, gid_t *egid)
 	*euid = uc.uid;
 	*egid = uc.gid;
 	return (0);
+#elif defined(LOCAL_PEERCRED)
+	struct xucred uc;
+	socklen_t uclen;
+	int error;
+
+	uclen = sizeof(uc);
+	error = getsockopt(s, SOL_LOCAL, LOCAL_PEERCRED, &uc, &uclen); /*  SCM_CREDENTIALS */
+	if (error != 0)
+		return error;
+	*euid = uc.cr_uid;
+	*egid = uc.cr_gid;
+	return 0;
+#else
+	return ENOTSUP;
+#endif
  }
 
 #endif

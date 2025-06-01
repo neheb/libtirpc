@@ -40,6 +40,11 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+
+#ifdef __APPLE__
+#define __APPLE_USE_RFC_3542
+#endif
+
 #include <pthread.h>
 #include <reentrant.h>
 #include <sys/types.h>

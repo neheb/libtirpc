@@ -50,7 +50,7 @@ extern "C" {
 
 /* These are defined in /usr/include/rpc/netdb.h, unless we are using
    the C library without RPC support. */
-#if defined(__UCLIBC__) && !defined(__UCLIBC_HAS_RPC__) || !defined(__GLIBC__) && !defined(HAVE_STRUCT_RPCENT)
+#if defined(__UCLIBC__) && !defined(__UCLIBC_HAS_RPC__) || !defined(__GLIBC__) && !defined(HAVE_STRUCT_RPCENT) && !defined(__MACH__)
 
 struct rpcent {
 	char	*r_name;	/* name of server for this rpc program */
