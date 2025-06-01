@@ -75,6 +75,8 @@
 
 #define MCALL_MSG_SIZE 24
 
+#ifndef CMGROUP_MAX
+
 #define CMGROUP_MAX    16
 #define SCM_CREDS      0x03            /* process creds (struct cmsgcred) */
 
@@ -95,6 +97,9 @@ struct cmsgcred {
         short   cmcred_ngroups;         /* number or groups */
         gid_t   cmcred_groups[CMGROUP_MAX];     /* groups */
 };
+#else
+#undef rpc_createerr                   /* make it clear it is a thread safe variable */
+#endif
 
 struct cmessage {
         struct cmsghdr cmsg;

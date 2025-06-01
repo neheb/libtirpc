@@ -32,7 +32,7 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 
-#ifndef SO_PEERCRED
+#if __has_include(<sys/ucred.h>)
 #include <sys/ucred.h>
 #endif
 
