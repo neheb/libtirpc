@@ -36,8 +36,6 @@
  * These definitions are only guaranteed to be valid on Linux. 
  */
 
-#if defined(__linux__) || defined(__APPLE__)
-
 #include <pthread.h>
 
 #define mutex_t			pthread_mutex_t
@@ -75,5 +73,3 @@
 #define thr_once(o, i)		pthread_once(o, i)
 #define thr_self()		pthread_self()
 #define thr_exit(x)		pthread_exit(x)
-
-#endif
