@@ -1,10 +1,6 @@
 #ifndef _NETCONFIG_H_
 #define _NETCONFIG_H_
 
-#ifdef HAVE_FEATURES_H
-#include <features.h>
-#endif
-
 #define NETCONFIG "/etc/netconfig"
 #define NETPATH	  "NETPATH"
 
