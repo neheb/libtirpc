@@ -61,9 +61,11 @@ sources = files(
   'xdr_stdio.c',
 )
 
-cargs = ['-DHAVE_CONFIG_H', '-D_XOPEN_SOURCE=700', '-DPORTMAP']
+cargs = ['-DHAVE_CONFIG_H', '-DPORTMAP']
 if host_machine.system() == 'darwin'
   cargs += '-D_DARWIN_C_SOURCE'
+elif host_machine.system() in ['freebsd', 'netbsd', 'openbsd']
+  cargs += '-D_BSD_SOURCE'
 else
   cargs += '-D_GNU_SOURCE'
 endif
